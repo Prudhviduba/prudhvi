@@ -1,0 +1,214 @@
+//prudhvi234
+//Prudhvi@1289
+
+: sudo docker images | grep onap
+: sudo docker login
+: sudo docker build
+: sudo docker ps
+: sudo docker ps -a
+: sudo docker logs -f sdnr			//Everything OK in Certificate Installation 
+__________________________________________
+
+
+: curl -k -X GET https://localhost:8181/ready
+: curl -k -X GET https://localhost:8181/ready -vvv
+: http://localhost:8282/odlux/index.html#/
+___________________________________________
+
+
+: docker compose -f <.yaml file> up -d	//--build	//Start
+: docker compose -f <.yaml file> down		//-v		//Stop
+: docker compose -f <.yaml file> pull				//Pull
+____________________________________________
+
+-f	//we can avoid -f if your filename is <docker-compose.yml>
+-d	//The container runs in the background and doesn't occupy the terminal window. 	
+____________________________________________
+
+
+//sudo docker run -d --name <container-name> <docker-compose>
+//sudo docker run <container-name>
+
+: sudo docker stop <container-id>
+: sudo docker rm <container-id>
+: sudo docker logs <container-id>
+___________________________________________
+
+
+./netconf-console.py --host=10.10.6.2 -u sdn -p password --port 830 --get-config -x
+____________________________________________
+
+
+: sudo docker rmi -f $(sudo docker images -q)		//remove all Docker images on your system.
+: sudo systemctl status docker			//Docker daemon is running
+: sudo systemctl start docker				//If it's not running, start it
+___________________________________________
+
+
+ls -l /var/run/docker.sock				//Check the permissions of the Docker socket file
+sudo chown root:docker /var/run/docker.sock		//adjust the permissions or group ownership accordingly
+sudo systemctl restart docker				//After making changes, restart the Docker daemon
+___________________________________________
+
+
+EXPORTING IMAGES
+: docker save my-image:latest > my-image.tar		//manually export Docker image
+: docker load < my-image.tar				//You'll now see the newly imported image in your docker images output. You're ready to start a new container with docker run.
+___________________________________________
+
+
+DOCKER EXPORT
+: docker export my-container > my-container.tar	//
+: docker import my-container.tar my-image:latest	//	
+____________________________________________
+
+
+: docker build -t my-account/my-image:latest 		//Add a tag that starts with your Docker Hub username
+: docker push my-account/my-image:latest		//use the docker push command to push the tagged image up to Docker Hub.
+____________________________________________
+
+
+
+sudo pacman -S docker
+sudo usermod -aG docker $USER
+
+_____________
+
+
+sudo yum -y update			
+sudo yum install -y docker		//Install DOCKER
+sudo service docker start		//START DOCKER
+sudo usermod -a -G docker "user"
+sudo service docker stop		//STOP DOCKER
+sudo yum remove docker			//uninstall DOCKER
+____________
+
+
+
+BASIC
+: docker --version			//Docker version 24.0.7, build afdd53b
+: docker version
+: docker -v
+: docker info				//to get the information
+: docker --help
+: docker login
+————————————
+IMAGES
+: docker images
+: docker pull
+: docker rmi
+————————————
+CONTAINERS
+: docker ps				//to get list of running containers
+: docker ps -a 			//to get list of all containers
+: docker run <image>			//to run the image
+: docker start
+: docker stop
+————————————
+SYSTEM
+: docker stats
+: docker system df
+: docker system prune
+————————————
+DOCKER IMAGES
+: docker images --help
+: docker pull image
+: docker images			//to get list of images present locally
+: docker images -q
+: docker images -f “dangling=false”
+: docker images -f “dangling=false” -q
+
+: docker run image
+: docker rmi image
+: docker rmi -f image
+
+: docker inspect
+: docker history imageName
+————————————————————————
+DOCKER CONTAINERS
+: docker ps
+: docker run ImageName
+: docker start ContainerName/ID
+: docker stop ContainerName/ID
+
+: docker pause ContainerName/ID
+: docker unpause  ContainerName/ID
+
+: docker top ContainerName/ID
+: docker stats ContainerName/ID
+
+: docker attach ContainerName/ID
+
+: docker kill ContainerName/ID
+: docker rm ContainerName/ID
+
+: docker history ImageName/ID
+————————————————————————————————————
+
+Dockerfile : 
+A text file with instructions to build image
+Automation of Docker Image Creation
+
+FROM,RUN,CMD
+
+Step 1 : Create a file named Dockerfile
+Step 2 : Add instructions in Dockerfile
+Step 3 : Build dockerfile to create image
+Step 4 : Run image to create container
+
+COMMANDS
+: docker build 					// build a docker image using a Dockerfile 
+: docker build -t ImageName:Tag directoryOfDockerfile
+: docker build -t <my_first_image> .			//
+: docker run image
+————————————————————————————————————
+
+DOCKER COMPOSE
+: docker-compose -v			//docker compose version
+: pip install -U docker-compose	//docker compose install using pip	//https://github.com/docker/compose/releases
+: vi docker-compose.yml		//Create docker compose file at any location on your system
+: docker-compose config		//Check the validity of file by command
+: docker-compose up -d			//Run docker-compose.yml file by command
+: docker-compose down			//Bring down application by command
+————————————————————————————————————
+
+DOCKER VOLUME
+Volumes are the preferred mechanism for persisting data generated by and used by Docker containers
+
+: docker volume  //get information
+: docker volume --help
+: docker volume create <volume_name>
+: docker volume ls
+: docker volume inspect <volume_name>
+: docker volume rm <volume_name>
+: docker volume prune
+————————————————————————————————————
+
+
+youtube
+https://www.youtube.com/playlist?list=PLhW3qG5bs-L99pQsZ74f-LC-tOEsBp2rK
+
+websites
+https://labs.play-with-docker.com/
+
+References - 
+https://hub.docker.com/
+https://docs.docker.com/get-started/swarm-deploy/
+https://docs.docker.com/desktop/#installing-machine-directly
+
+https://hub.docker.com/_/ubuntu/
+https://docs.docker.com/engine/refere
+https://automationstepbystep.com/
+https://www.howtogeek.com/devops/how-to-share-docker-images-with-others/
+Linux free instance - https://aws.amazon.com/free/
+Docker Manuals - https://docs.docker.com/manuals/
+https://get.docker.com/
+https://docs.docker.com/engine/install/					//To install docker from binaries
+http://docs.aws.amazon.com/AmazonECS/
+https://github.com/wsargent/docker-cheat-sheet#dockerfile
+https://docs.docker.com/engine/reference/builder/#environment-replacement
+https://www.google.co.in/search?q=dockerfile&rlz=1C5CHFA_enIN734IN734&source=lnms&tbm=isch&sa=X&ved=0ahUKEwicqqOe_oTcAhWLbysKHX_6B5sQ_AUICigB&biw=1280&bih=703
+
+https://docs.docker.com/engine/reference/commandline/cli/
+
+
